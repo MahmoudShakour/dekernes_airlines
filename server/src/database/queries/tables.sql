@@ -18,6 +18,10 @@ CREATE TABLE airplane(
     manufacturer_company VARCHAR(20) NOT NULL
 );
 
+INSERT INTO airplane VALUES ("ABC","model1","comp1");
+INSERT INTO airplane VALUES ("AAA","model2","comp1");
+INSERT INTO airplane VALUES ("AAB","model2","comp1");
+
 CREATE TABLE flight(
     flight_number VARCHAR(10),
     flight_date DATE,
