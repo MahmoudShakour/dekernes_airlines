@@ -61,8 +61,8 @@ CREATE TABLE customer(
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(15) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(50) NOT NULL,
-    email VARCHAR(15) NOT NULL UNIQUE
+    password VARCHAR(200) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE customer_phone_number(
