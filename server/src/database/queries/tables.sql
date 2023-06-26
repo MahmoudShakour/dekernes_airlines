@@ -10,7 +10,13 @@ DROP TABLE IF EXISTS customer_phone_number;
 DROP TABLE IF EXISTS purchase;
 DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS airplane;
+DROP TABLE IF EXISTS airport;
 
+CREATE TABLE airport(
+    airport_code CHAR(3) PRIMARY KEY,
+    country VARCHAR(20) NOT NULL,
+    city VARCHAR(20) NOT NULL
+);
 
 CREATE TABLE airplane(
     airplane_code CHAR(3) PRIMARY KEY,
@@ -22,9 +28,11 @@ INSERT INTO airplane VALUES ("ABC","model1","comp1");
 INSERT INTO airplane VALUES ("AAA","model2","comp1");
 INSERT INTO airplane VALUES ("AAB","model2","comp1");
 
+
+
 CREATE TABLE flight(
     flight_number VARCHAR(10),
-    flight_date DATE,
+    flight_date DATE NOT NULL,
     flight_time TIME NOT NULL,
     source_airport CHAR(3) NOT NULL ,
     destination_airport CHAR(3) NOT NULL ,
@@ -32,7 +40,9 @@ CREATE TABLE flight(
     airplane_code VARCHAR(15) NOT NULL,
     PRIMARY KEY(flight_number,flight_date),
     CHECK(flight_type IN ('domestic','international')),
-    FOREIGN KEY (airplane_code) REFERENCES airplane(airplane_code)
+    FOREIGN KEY (airplane_code) REFERENCES airplane(airplane_code),
+    FOREIGN KEY (source_airport) REFERENCES airport(airport_code),
+    FOREIGN KEY (destination_airport) REFERENCES airport(airport_code)
 );
 
 
@@ -41,7 +51,6 @@ CREATE TABLE airplane_seat(
     airplane_code VARCHAR(15) NOT NULL,
     seat_class VARCHAR(20) NOT NULL,
     seat_type CHAR(7) NOT NULL,
-    is_exit_row BOOLEAN NOT NULL,
     PRIMARY KEY(seat_number,airplane_code),
     FOREIGN KEY (airplane_code) REFERENCES airplane(airplane_code),
     CHECK(seat_type IN ('aisle','middle','window'))
@@ -51,6 +60,8 @@ CREATE TABLE customer(
     customer_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(15) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(50) NOT NULL,
     email VARCHAR(15) NOT NULL UNIQUE
 );
 
@@ -73,9 +84,8 @@ CREATE TABLE traveler(
     customer_id INT PRIMARY KEY,
     passport_number VARCHAR(40),
     country VARCHAR(20),
-    emergency_contact VARCHAR(30),
+    emergency_name VARCHAR(30),
     emergency_number VARCHAR(20),
-    frequent_flyer CHAR(7),
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
@@ -83,13 +93,13 @@ CREATE TABLE purchase(
     purchase_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
     purchase_date DATE NOT NULL,
-    comfirmation_code  CHAR(6) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
 
 CREATE TABLE ticket(
     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+    ticket_price NUMERIC (8,2) NOT NULL,
     customer_id INT NOT NULL,
     purchase_id INT NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
@@ -98,11 +108,11 @@ CREATE TABLE ticket(
 
 CREATE TABLE flight_seat(
     flight_number VARCHAR(10),
-    flight_date DATE,
+    airplane_code VARCHAR(15),
     seat_number CHAR(5),
     ticket_id INT NOT NULL UNIQUE,
-    PRIMARY KEY(flight_number,flight_date,seat_number),
-    FOREIGN KEY (flight_number,flight_date) REFERENCES flight(flight_number,flight_date),
-    FOREIGN KEY (seat_number) REFERENCES airplane_seat(seat_number),
+    PRIMARY KEY(flight_number,airplane_code,seat_number),
+    FOREIGN KEY (flight_number) REFERENCES flight(flight_number),
+    FOREIGN KEY (seat_number,airplane_code) REFERENCES airplane_seat(seat_number,airplane_code),
     FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id)
 );
