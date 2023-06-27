@@ -17,8 +17,27 @@ async function getUsers(){
     return users;
 }
 
+
+async function filterFlights(data){
+    console.log(data);
+    const flights=await query(`
+    SELECT flight_number,flight_date,flight_type,flight_time,src.country as source_country,dest.country as dest_country 
+    FROM flight 
+    join airport as src on src.airport_code=flight.source_airport
+    join airport as dest  on dest.airport_code=flight.destination_airport
+    WHERE
+    (src.country=?) AND
+    (dest.country=?) AND
+    (flight_date>=?) AND
+    (flight_date<=?) AND
+    (flight_type=?)
+    `,data);
+    return flights;
+}
+
 module.exports={
     isUserExists,
     createUser,
-    getUsers
+    getUsers,
+    filterFlights
 }
