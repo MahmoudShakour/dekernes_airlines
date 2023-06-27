@@ -5,10 +5,10 @@ var router = express.Router();
 
 
 router.post('/',authToken, async function(req, res, next) {
-    const filteredFlights=await filterFlights([req.body.from,req.body.to,req.body.beginDate,req.body.EndDate,req.body.type]);
-    console.log(filteredFlights);
-    res.status(200).json(filteredFlights);
     try{
+        const filteredFlights=await filterFlights([req.body.from,req.body.to,req.body.beginDate,req.body.EndDate,req.body.type]);
+        console.log(filteredFlights);
+        res.status(200).json(filteredFlights);
     }
     catch(e){
         res.status(404).json({"message":"error!"});

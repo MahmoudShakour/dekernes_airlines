@@ -9,6 +9,7 @@ var query=require('./database/queries/execute_query');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var flightRouter = require('./routes/flight');
+var seatRouter = require('./routes/seat');
 const { isUserExists } = require('./database/queries/queries');
 
 var app = express();
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/' ,indexRouter);
 app.use('/', usersRouter);
 app.use('/flight', flightRouter);
+app.use('/seat', seatRouter);
 
 
 app.use(function(req, res, next) {

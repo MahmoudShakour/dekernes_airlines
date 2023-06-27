@@ -6,9 +6,9 @@ DROP TABLE IF EXISTS flight;
 DROP TABLE IF EXISTS airplane_seat;
 DROP TABLE IF EXISTS purchaser;
 DROP TABLE IF EXISTS traveler;
-DROP TABLE IF EXISTS customer_phone_number;
+DROP TABLE IF EXISTS user_phone_number;
 DROP TABLE IF EXISTS purchase;
-DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS airplane;
 DROP TABLE IF EXISTS airport;
 
@@ -48,13 +48,14 @@ CREATE TABLE airplane_seat(
     airplane_code VARCHAR(15) NOT NULL,
     seat_class VARCHAR(20) NOT NULL,
     seat_type CHAR(7) NOT NULL,
+    seat_price NUMERIC(8,2) NOT NULL,
     PRIMARY KEY(seat_number,airplane_code),
     FOREIGN KEY (airplane_code) REFERENCES airplane(airplane_code),
     CHECK(seat_type IN ('aisle','middle','window'))
 );
 
-CREATE TABLE customer(
-    customer_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE user(
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(15) NOT NULL,
     last_name VARCHAR(15) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -62,57 +63,56 @@ CREATE TABLE customer(
     email VARCHAR(50) NOT NULL UNIQUE
 );
 
-CREATE TABLE customer_phone_number(
-    customer_id INT,
-    phone_number VARCHAR(20),
-    PRIMARY KEY(customer_id,phone_number),
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
-);
+-- CREATE TABLE user_phone_number(
+--     user_id INT,
+--     phone_number VARCHAR(20),
+--     PRIMARY KEY(user_id,phone_number),
+--     FOREIGN KEY (user_id) REFERENCES user(user_id)
+-- );
 
-CREATE TABLE purchaser(
-    customer_id INT PRIMARY KEY,
-    credit_card CHAR(16),
-    expiration_date DATE,
-    verification_code CHAR(3),
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
-);
+-- CREATE TABLE purchaser(
+--     user_id INT PRIMARY KEY,
+--     credit_card CHAR(16),
+--     expiration_date DATE,
+--     verification_code CHAR(3),
+--     FOREIGN KEY (user_id) REFERENCES user(user_id)
+-- );
 
-CREATE TABLE traveler(
-    customer_id INT PRIMARY KEY,
-    passport_number VARCHAR(40),
-    country VARCHAR(20),
-    emergency_name VARCHAR(30),
-    emergency_number VARCHAR(20),
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
-);
+-- CREATE TABLE traveler(
+--     user_id INT PRIMARY KEY,
+--     passport_number VARCHAR(40),
+--     country VARCHAR(20),
+--     emergency_name VARCHAR(30),
+--     emergency_number VARCHAR(20),
+--     FOREIGN KEY (user_id) REFERENCES user(user_id)
+-- );
 
 CREATE TABLE purchase(
     purchase_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id INT NOT NULL,
-    purchase_date DATE NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+    user_id INT NOT NULL,
+    purchase_date DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 
 
-CREATE TABLE ticket(
-    ticket_id INT AUTO_INCREMENT PRIMARY KEY,
-    ticket_price NUMERIC (8,2) NOT NULL,
-    customer_id INT NOT NULL,
-    purchase_id INT NOT NULL,
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-    FOREIGN KEY (purchase_id) REFERENCES purchase(purchase_id)
-);
+-- CREATE TABLE ticket(
+--     ticket_id INT AUTO_INCREMENT PRIMARY KEY,
+--     user_id INT NOT NULL,
+--     FOREIGN KEY (user_id) REFERENCES user(user_id),
+--     FOREIGN KEY (purchase_id) REFERENCES purchase(purchase_id)
+-- );
 
 CREATE TABLE flight_seat(
     flight_number VARCHAR(10),
     airplane_code VARCHAR(15),
     seat_number CHAR(5),
-    ticket_id INT NOT NULL UNIQUE,
+    purchase_id INT NOT NULL,
     PRIMARY KEY(flight_number,airplane_code,seat_number),
     FOREIGN KEY (flight_number) REFERENCES flight(flight_number),
     FOREIGN KEY (seat_number,airplane_code) REFERENCES airplane_seat(seat_number,airplane_code),
-    FOREIGN KEY (ticket_id) REFERENCES ticket(ticket_id)
+    FOREIGN KEY (purchase_id) REFERENCES purchase(purchase_id)
 );
+
 
 
 INSERT INTO airplane VALUES ("ABC","model1","comp1");
@@ -129,11 +129,44 @@ INSERT INTO flight VALUES (1,'2023-06-27','12:00:00','DEK','CAI','domestic','AAA
 INSERT INTO flight VALUES (2,'2023-06-27','12:00:00','RDH','DOH','international','AAA');
 INSERT INTO flight VALUES (3,'2023-06-27','12:00:00','CAI','GDH','international','AAA');
 
+INSERT INTO airplane_seat VALUES('A1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('A2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('A3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('A4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('B1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('B2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('B3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('B4','AAA','economy','window',1000.00);
 
-SELECT flight_number,flight_date,flight_type,flight_time,src.country as source_country,dest.country as dest_country 
-FROM flight 
-join airport as src on src.airport_code=flight.source_airport
-join airport as dest  on dest.airport_code=flight.destination_airport
+INSERT INTO airplane_seat VALUES('A1','AAB','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('A2','AAB','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('A3','AAB','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('A4','AAB','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('B1','AAB','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('B2','AAB','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('B3','AAB','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('B4','AAB','economy','window',1000.00);
+
+INSERT INTO airplane_seat VALUES('A1','ABC','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('A2','ABC','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('A3','ABC','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('A4','ABC','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('B1','ABC','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('B2','ABC','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('B3','ABC','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('B4','ABC','economy','window',1000.00);
+
+
+
+
+
+-- SELECT * FROM airplane_seat natural join flight WHERE flight_number=1;
+
+
+-- SELECT flight_number,flight_date,flight_type,flight_time,src.country as source_country,dest.country as dest_country 
+-- FROM flight 
+-- join airport as src on src.airport_code=flight.source_airport
+-- join airport as dest  on dest.airport_code=flight.destination_airport
 -- WHERE
 -- (src.country="egypt") AND
 -- (dest.country="saudi") AND
