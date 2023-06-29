@@ -9,11 +9,14 @@ const {
 var router = express.Router();
 
 router.get("/:flightId", authToken, async function (req, res, next) {
-  const [seats, reservedSeats] = await Promise.all[
-    (getSeatsByFlight([req.params.flightId]),
-    getReservedSeatsByFlight(req.params.flightId))
-  ];
-  res.status(200).json({ seats, reservedSeats });
+  const [seats, reservedSeats] = await Promise.all([
+    getSeatsByFlight([req.params.flightId]),
+    getReservedSeatsByFlight(req.params.flightId),
+  ]);
+
+  res
+    .status(200)
+    .json({ seats, reservedSeats: reservedSeats.map((x) => x.seat_number) });
 });
 
 router.post("/:flightId", authToken, async function (req, res, next) {
@@ -24,7 +27,7 @@ router.post("/:flightId", authToken, async function (req, res, next) {
       res.status(403).json({ message: "you can not reserve taken seats." });
       return;
     }
-    
+
     const purchase = await initializePurchase(req.user.user_id);
 
     await reserveSeats(

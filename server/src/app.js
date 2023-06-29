@@ -10,6 +10,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var flightRouter = require('./routes/flight');
 var seatRouter = require('./routes/seat');
+var purchaseRouter = require('./routes/purchase');
 const { isUserExists } = require('./database/queries/queries');
 
 var app = express();
@@ -22,6 +23,7 @@ app.use('/' ,indexRouter);
 app.use('/', usersRouter);
 app.use('/flight', flightRouter);
 app.use('/seat', seatRouter);
+app.use('/purchase', purchaseRouter);
 
 
 app.use(function(req, res, next) {
