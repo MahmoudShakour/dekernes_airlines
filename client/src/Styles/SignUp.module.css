@@ -35,3 +35,9 @@
   background-color: #435cae;
   color: white;
 }
+
+.errorMessage {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
