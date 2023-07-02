@@ -28,6 +28,7 @@ export default function FlightFilter({setFlights}) {
       method="POST"
       onSubmit={handleSubmit}
     >
+      <div>Filter</div>
       <input type="text" id="from" placeholder="from" name="from" />
       <input type="text" id="to" placeholder="to" name="to" />
       <input
