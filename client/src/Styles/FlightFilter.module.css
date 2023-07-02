@@ -1,0 +1,26 @@
+.flightForm {
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 30px;
+  font-size: 25px;
+  align-items: stretch;
+  max-width: 400px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.flightForm input {
+  padding: 10px;
+  font-size: 25px;
+  border-radius: 10px;
+}
+
+.flightForm button {
+  font-size: 25px;
+  font-weight: 600;
+  padding: 10px;
+  background-color: #435cae;
+  color: white;
+}
+
