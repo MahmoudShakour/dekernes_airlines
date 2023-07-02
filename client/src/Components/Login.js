@@ -2,7 +2,7 @@ import style from "../Styles/Login.module.css";
 import signIn from "../Api/Sign-in";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-export default function Login() {
+export default function Login({user,changeUser}) {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
 
@@ -12,9 +12,10 @@ export default function Login() {
       username: e.target.username.value,
       password: e.target.password.value,
     };
-    const isSignedIn = await signIn(data);
-    console.log(isSignedIn);
-    if (isSignedIn) {
+    const loggedUser = await signIn(data);
+    console.log(loggedUser);
+    if (loggedUser) {
+      changeUser(loggedUser);
       navigate("/", { replace: true });
     } else {
       setVisible(true);

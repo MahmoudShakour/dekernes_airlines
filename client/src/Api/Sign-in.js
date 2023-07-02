@@ -7,9 +7,10 @@ async function signIn(data){
     
     if(response.ok){
         const resp=await response.json();   
+        console.log(resp);
         localStorage.setItem('token',resp.accessToken);
         console.log(localStorage.getItem('token'));
-        return true;
+        return resp.user;
     }
     else{
         return false;

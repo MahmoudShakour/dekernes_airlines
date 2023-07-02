@@ -34,12 +34,7 @@ export default function SignUp() {
         placeholder="firstname"
         name="firstname"
       />
-      <input
-        type="text"
-        id="lastname"
-        placeholder="lastname"
-        name="lastname"
-      />
+      <input type="text" id="lastname" placeholder="lastname" name="lastname" />
       <input type="text" id="email" placeholder="email" name="email" />
       <input type="text" id="username" placeholder="username" name="username" />
       <input type="text" id="password" placeholder="password" name="password" />
