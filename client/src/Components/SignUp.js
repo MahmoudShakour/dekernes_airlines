@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import signUp from "../Api/Sign-up";
 import style from "../Styles/SignUp.module.css";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 export default function SignUp() {
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
@@ -26,25 +26,46 @@ export default function SignUp() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={style.signupForm} method="POST">
-      <div className={style.title}>Registiration Form</div>
-      <input
-        type="text"
-        id="firstname"
-        placeholder="firstname"
-        name="firstname"
-      />
-      <input type="text" id="lastname" placeholder="lastname" name="lastname" />
-      <input type="text" id="email" placeholder="email" name="email" />
-      <input type="text" id="username" placeholder="username" name="username" />
-      <input type="text" id="password" placeholder="password" name="password" />
-      <button type="submit">Sign Up</button>
-      <a href="http://localhost:3000/sign-in">already have an account? Login</a>
-      {visible ? (
-        <div className={style.errorMessage}>
-          entered username or email is already taken.
-        </div>
-      ) : null}
-    </form>
+      <form onSubmit={handleSubmit} className={style.signupForm} method="POST">
+        <div className={style.title}>Registiration Form</div>
+        <input
+          type="text"
+          id="firstname"
+          placeholder="firstname"
+          name="firstname"
+        />
+        <input
+          type="text"
+          id="lastname"
+          placeholder="lastname"
+          name="lastname"
+        />
+        <input type="text" id="email" placeholder="email" name="email" />
+        <input
+          type="text"
+          id="username"
+          placeholder="username"
+          name="username"
+        />
+        <input
+          type="text"
+          id="password"
+          placeholder="password"
+          name="password"
+        />
+        <button type="submit">Sign Up</button>
+          <div className={style.haveAccountMessage} > 
+          {"already have an account? " }
+
+          <Link className={style.login} to="/login">
+           Login
+          </Link>
+          </div>
+        {visible ? (
+          <div className={style.errorMessage}>
+            entered username or email is already taken.
+          </div>
+        ) : null}
+      </form>
   );
 }

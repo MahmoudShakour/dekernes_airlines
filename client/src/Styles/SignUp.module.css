@@ -6,15 +6,17 @@
   font-size: 25px;
   align-items: stretch;
   min-width: 400px;
-  background-color: white;
-  border-radius: 10px;
+  border: 3px solid white;
+  border-radius: 40px;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .title {
   font-size: 30px;
   font-weight: 600;
   border-radius: 10px;
-  color: #435cae;
+  color: #FFFFFF;
   align-self: center;
 }
 
@@ -22,6 +24,7 @@
   padding: 10px;
   font-size: 25px;
   border-radius: 10px;
+  border: none;
 }
 
 .signupForm a {
@@ -32,8 +35,21 @@
   font-size: 25px;
   font-weight: 600;
   padding: 10px;
-  background-color: #435cae;
+  background-color: #007AFF;
   color: white;
+  border-radius: 10px;
+  border: none;
+}
+
+.haveAccountMessage{
+  align-self: center;
+  color: white;
+}
+
+
+.login{
+  color: #FFC17A;
+  text-decoration: none;
 }
 
 .errorMessage {

@@ -5,7 +5,7 @@ import logo from "../Assets/logo.svg";
 export default function NavBar({ user }) {
   return (
     <div className={style.container}>
-      <img src={logo} alt="" width="100px" />
+      <img src={logo} alt="" width="120px" />
       {user ? (
         <div className={style.section}>
           <div> {user.username}</div>

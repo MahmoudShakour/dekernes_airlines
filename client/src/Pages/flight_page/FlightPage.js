@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import Footer from "../../Components/Footer";
+import { useState } from "react";
 import NavBar from "../../Components/NavBar";
 import style from "./flightPage.module.css";
 import FlightFilter from "../../Components/FlightFilter";
@@ -16,7 +15,6 @@ export default function FlightPage({user}) {
         <FlightFilter setFlights={setFlights} />
         <FlightDisplay flights={flights} />
       </div>
-      <Footer />
     </div>
   );
 }
