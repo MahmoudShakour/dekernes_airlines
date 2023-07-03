@@ -11,7 +11,6 @@ export default function FlightFilter({ setFlights }) {
       to: e.target.to.value,
       beginDate: e.target.startdate.value,
       endDate: e.target.enddate.value,
-      type: e.target.flight_type.value,
     };
     const flights = await filterFlight(data);
     console.log(flights);

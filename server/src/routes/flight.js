@@ -10,7 +10,6 @@ router.post("/", authToken, async function (req, res, next) {
       req.body.to,
       req.body.beginDate,
       req.body.endDate,
-      req.body.type,
     ]);
     console.log("hi");
     console.log(filteredFlights);

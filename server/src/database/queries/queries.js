@@ -31,8 +31,7 @@ async function filterFlights(data) {
     (src.country=?) AND
     (dest.country=?) AND
     (flight_date>=?) AND
-    (flight_date<=?) AND
-    (flight_type=?)
+    (flight_date<=?)
     `,
     data
   );
