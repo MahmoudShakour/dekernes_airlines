@@ -2,6 +2,7 @@ import style from "../Styles/Login.module.css";
 import signIn from "../Api/Sign-in";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 export default function Login({user,changeUser}) {
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
@@ -30,8 +31,11 @@ export default function Login({user,changeUser}) {
       <button type="submit" className={style.loginButton}>
         Log In
       </button>
-      <a href="http://localhost:3000/sign-up">forget password?</a>
-      <a href="http://localhost:3000/sign-up">sign-up</a>
+      <Link className={style.link}  to="#" >Forget Password?</Link>
+      <div className={style.link} >
+      {"Don't have an account? "}
+      <Link className={style.signupButton}  to="/sign-up" >Sign up</Link>
+      </div>
       {visible ? (
         <div className={style.errorMessage}>
           username or password is not correct.
