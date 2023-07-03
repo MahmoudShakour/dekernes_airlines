@@ -1,26 +1,34 @@
 import style from "../Styles/NavBar.module.css";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import logo from "../Assets/logo.svg";
 
 export default function NavBar({ user }) {
   return (
     <div className={style.container}>
-      <div className={style.title}>dekernes airlines</div>
+      <img src={logo} alt="" width="100px" />
       {user ? (
         <div className={style.section}>
           <div> {user.username}</div>
-          <Link className={style.link} to="/flight">reserve a flight</Link>
-          <Link className={style.link} to="/purchase">my purchases</Link>
+          <Link className={style.link} to="/flight">
+            reserve a flight
+          </Link>
+          <Link className={style.link} to="/purchase">
+            my purchases
+          </Link>
         </div>
       ) : (
         <div className={style.section}>
-          <a className={style.a} href="http://localhost:3001/sign-up">
-            sign-up
-          </a>
-          <a className={style.a} href="http://localhost:3001/login">
-            sign-in
-          </a>
+          <Link className={style.link} to="/sign-up">
+            sign up
+          </Link>
+          <Link className={style.link} to="/login">
+            Log in
+          </Link>
         </div>
       )}
     </div>
   );
+}
+
+{
 }
