@@ -8,6 +8,7 @@ var {
   createUser,
 } = require("../database/queries/queries.js");
 const AuthUser = require("../middlewares/AuthUser.js");
+const authToken = require("../middlewares/AuthToken.js");
 
 router.post("/sign-up", async function (req, res, next) {
   const users = await isUserExists(req.body.username);
@@ -34,10 +35,10 @@ router.post("/sign-up", async function (req, res, next) {
 
 router.post("/sign-in", AuthUser, async function (req, res, next) {
   const accessToken = jwt.sign(req.user, process.env.TOKEN_SECRET);
-  res.json({ accessToken });
+  res.json({ accessToken,user:req.user });
 });
 
-router.get("/users", async function (req, res, next) {
+router.get("/users",authToken, async function (req, res, next) {
   const users = await getUsers();
   res.status(200).json(users);
 });

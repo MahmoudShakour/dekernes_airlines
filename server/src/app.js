@@ -1,25 +1,22 @@
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
-var query=require('./database/queries/execute_query');
+const cors=require('cors');
 
 
 
 
-var indexRouter = require('./routes/index');
+
 var usersRouter = require('./routes/user');
 var flightRouter = require('./routes/flight');
 var seatRouter = require('./routes/seat');
 var purchaseRouter = require('./routes/purchase');
-const { isUserExists } = require('./database/queries/queries');
 
 var app = express();
 
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/' ,indexRouter);
 app.use('/', usersRouter);
 app.use('/flight', flightRouter);
 app.use('/seat', seatRouter);
@@ -35,7 +32,6 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   res.status(err.status || 500);
-  res.render('error');
 });
 
 

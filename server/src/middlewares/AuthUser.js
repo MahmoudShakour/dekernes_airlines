@@ -2,7 +2,6 @@ const { isUserExists } = require("../database/queries/queries");
 const bcrypt=require("bcrypt");
 
 async function AuthUser(req,res,next){
-    
     const foundUser=await isUserExists(req.body.username);
     
     if(foundUser.length>0){

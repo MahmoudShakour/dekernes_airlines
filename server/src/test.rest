@@ -1,0 +1,90 @@
+POST http://localhost:3000/sign-up
+Content-Type: application/json
+
+{
+    "firstname":"mahmoud",
+    "lastname":"abdulshakour",
+    "username":"MahmoudShakour2",
+    "password":"123m456789",
+    "email":"mahmoudshakour.dev@gmailcom2"
+}
+
+###
+
+GET http://localhost:3000/users
+Content-Type: application/json
+
+{
+    
+}
+
+###
+
+POST http://localhost:3000/sign-in
+Content-Type: application/json
+
+{
+    
+    "username":"MahmoudShakour2",
+    "password":"123m456789"
+}
+
+###
+
+GET http://localhost:3000/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJmaXJzdF9uYW1lIjoibWFobW91ZCIsImxhc3RfbmFtZSI6ImFiZHVsc2tha291ciIsInVzZXJuYW1lIjoiTWFobW91ZFNoYWtvdXIiLCJwYXNzd29yZCI6IiQyYiQxMCRsWHJRUHVGejZBY3daNlh3NW5HVHZPTXFScktwT0NZLzI5Z3lOSTVVMFZ3SHpKSFZpSzkwTyIsImVtYWlsIjoibWFobW91ZHNoYWtvdXIuZGV2QGdtYWlsY29tIiwiaWF0IjoxNjg3ODUyNjI2fQ.Oqke4yy6RXfblLw01n5JC8sZiFrYDETsJvR1u10pXek
+###
+
+GET http://localhost:3000/flight
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJmaXJzdF9uYW1lIjoibWFobW91ZCIsImxhc3RfbmFtZSI6ImFiZHVsc2tha291ciIsInVzZXJuYW1lIjoiTWFobW91ZFNoYWtvdXIiLCJwYXNzd29yZCI6IiQyYiQxMCRsWHJRUHVGejZBY3daNlh3NW5HVHZPTXFScktwT0NZLzI5Z3lOSTVVMFZ3SHpKSFZpSzkwTyIsImVtYWlsIjoibWFobW91ZHNoYWtvdXIuZGV2QGdtYWlsY29tIiwiaWF0IjoxNjg3ODUyNjI2fQ.Oqke4yy6RXfblLw01n5JC8sZiFrYDETsJvR1u10pXek
+
+{
+    "from":"egypt",
+    "to":"saudi",
+    "beginDate":"2023-06-27",
+    "EndDate":"2023-06-27",
+    "type":"international"
+}
+
+###
+
+GET http://localhost:3000/seat/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJmaXJzdF9uYW1lIjoibWFobW91ZCIsImxhc3RfbmFtZSI6ImFiZHVsc2hha291ciIsInVzZXJuYW1lIjoiTWFobW91ZFNoYWtvdXIiLCJwYXNzd29yZCI6IiQyYiQxMCR4aUx1VHdoaXlheG1ZNzV4eXBUUGJlVjUzSy9kUHMxakFrNHZaRC40TzUwUFJ3SnljLkZURyIsImVtYWlsIjoibWFobW91ZHNoYWtvdXIuZGV2QGdtYWlsY29tIiwiaWF0IjoxNjg3ODc3NzU1fQ.9zfRDG6_1Sflec5BhjxRNzD-9EjJEGH_B_AULwlKwkc
+
+{
+
+}
+
+###
+
+POST http://localhost:3000/seat/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJmaXJzdF9uYW1lIjoibWFobW91ZCIsImxhc3RfbmFtZSI6ImFiZHVsc2hha291ciIsInVzZXJuYW1lIjoiTWFobW91ZFNoYWtvdXIyIiwicGFzc3dvcmQiOiIkMmIkMTAkV0VGUHVNRXAuR2JvNXBzdnpMei9lZUcwQklXRGVUc2NHMmVsdHNWNWxnVFR6djlTMi8yLnkiLCJlbWFpbCI6Im1haG1vdWRzaGFrb3VyLmRldkBnbWFpbGNvbTIiLCJpYXQiOjE2ODgwNjE5NTB9.h1TKGijYrTwsatfRtW4dHPSWYPkoIiJO8UYxKC8Wdo0
+
+{
+    "seats": ["B2"],
+    "airplane_code":"AAA"
+}
+
+
+###
+
+GET http://localhost:3000/purchase
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJmaXJzdF9uYW1lIjoibWFobW91ZCIsImxhc3RfbmFtZSI6ImFiZHVsc2hha291ciIsInVzZXJuYW1lIjoiTWFobW91ZFNoYWtvdXIyIiwicGFzc3dvcmQiOiIkMmIkMTAkV0VGUHVNRXAuR2JvNXBzdnpMei9lZUcwQklXRGVUc2NHMmVsdHNWNWxnVFR6djlTMi8yLnkiLCJlbWFpbCI6Im1haG1vdWRzaGFrb3VyLmRldkBnbWFpbGNvbTIiLCJpYXQiOjE2ODgwNjE5NTB9.h1TKGijYrTwsatfRtW4dHPSWYPkoIiJO8UYxKC8Wdo0
+
+{
+    
+}
+
+###
+
+GET http://localhost:3000/purchase/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoyLCJmaXJzdF9uYW1lIjoibWFobW91ZCIsImxhc3RfbmFtZSI6ImFiZHVsc2hha291ciIsInVzZXJuYW1lIjoiTWFobW91ZFNoYWtvdXIyIiwicGFzc3dvcmQiOiIkMmIkMTAkV0VGUHVNRXAuR2JvNXBzdnpMei9lZUcwQklXRGVUc2NHMmVsdHNWNWxnVFR6djlTMi8yLnkiLCJlbWFpbCI6Im1haG1vdWRzaGFrb3VyLmRldkBnbWFpbGNvbTIiLCJpYXQiOjE2ODgwNjE5NTB9.h1TKGijYrTwsatfRtW4dHPSWYPkoIiJO8UYxKC8Wdo0
+
+{
+    
+}
