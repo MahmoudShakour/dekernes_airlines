@@ -6,15 +6,23 @@ export default function NavBar({ user }) {
   return (
     <div className={style.container}>
       <img src={logo} alt="" width="120px" />
+      <div className={style.list}>
+        <Link className={style.link} to="/">
+          Home
+        </Link>
+        <Link className={style.link} to="/flight">
+          Book a flight
+        </Link>
+        <Link className={style.link} to="/purchase">
+          my purchases
+        </Link>
+        <Link className={style.link} to="/contact">
+          my purchases
+        </Link>
+      </div>
       {user ? (
         <div className={style.section}>
           <div> {user.username}</div>
-          <Link className={style.link} to="/flight">
-            reserve a flight
-          </Link>
-          <Link className={style.link} to="/purchase">
-            my purchases
-          </Link>
         </div>
       ) : (
         <div className={style.section}>

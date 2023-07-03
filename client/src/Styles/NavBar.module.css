@@ -3,7 +3,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px;
-  font-size: 25px;
+  padding-left: 90px;
+  padding-right: 90px;
+  font-size: 30px;
   background-color: #4E267D;
   color: aliceblue;
 }
@@ -28,4 +30,11 @@
   color: aliceblue;
 }
 
+
+.list{
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex: 1;
+}
 
