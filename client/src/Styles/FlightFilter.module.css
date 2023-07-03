@@ -3,7 +3,7 @@
   align-items: stretch;
   flex-direction: column;
   padding: 40px;
-  gap: 30px;
+  gap: 50px;
   font-size: 25px;
   align-items: stretch;
   background-color: #4E267D;
@@ -12,7 +12,7 @@
 
 .flightForm input {
   padding: 10px;
-  font-size: 25px;
+  font-size: 30px;
   border-radius: 10px;
   border: none;
   width: 100%;

@@ -6,7 +6,7 @@ import FlightDisplay from "../../Components/FlightDisplay";
 
 export default function FlightPage({user}) {
   
-  const [flights,setFlights]=useState([]);
+  const [flights,setFlights]=useState(null);
 
   return (
     <div className={style.page} >

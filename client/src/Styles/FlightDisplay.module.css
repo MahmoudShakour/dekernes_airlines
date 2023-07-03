@@ -1,6 +1,10 @@
 .container {
   padding: 40px;
   font-size: 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 10px;
+  color: white;
 }
 
 .message {
@@ -9,31 +13,57 @@
 
 .flightItem {
   display: flex;
-  gap: 20px;
-  background-color: #ccc3c3;
+  flex-direction: column;
+  gap: 30px;
+  background-color: #815CAB;
   padding: 30px;
-  border-radius: 10px;
+  border-radius: 40px;
+  border: 2px solid white;
+  max-height: 200px;
 }
 
-.section {
+.section:first-of-type{
   flex: 1;
   display: flex;
-  flex-direction: column;
   gap: 15px;
-  border-right: 1px solid black;
-  /* align-items: center; */
+  justify-content: space-around;
 }
 
-.section:last-of-type {
-  border-right: none;
+.section:last-of-type{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: center;
+  justify-content: space-around;
+}
+
+.subSection{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 10px;
+  border-left: 3px solid #FBB808;
 }
 
 .button {
   font-size: 20px;
   font-weight: 600;
   padding: 10px;
-  background-color: #435cae;
-  color: white;
+  background-color: #FBB808;
+  color: #815CAB;
   border-radius: 10px;
   border: none;
+}
+
+
+.background{
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
+}
+
+.seats{
+  font-size: 16px;
+  color: white;
+  text-align: center  ;
 }
