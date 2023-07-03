@@ -17,7 +17,7 @@ export default function NavBar({ user }) {
           my purchases
         </Link>
         <Link className={style.link} to="/contact">
-          my purchases
+          Contact
         </Link>
       </div>
       {user ? (
