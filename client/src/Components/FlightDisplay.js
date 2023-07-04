@@ -1,6 +1,7 @@
 import style from "../Styles/FlightDisplay.module.css";
 import moment from "moment";
 import background from "../Assets/filterbg.svg";
+import { Link } from "react-router-dom";
 export default function FlightDisplay({ flights }) {
   return flights === null ? (
     <div className={style.background}>
@@ -30,8 +31,10 @@ export default function FlightDisplay({ flights }) {
               </div>
             </div>
             <div className={style.section}>
-              <button className={style.button}>Preserve Now</button>
-              <div className={style.seats} >Available seats: 30</div>
+              <button className={style.button}>
+                <Link to={"/seat/"+flight.flight_number} >Preserve Now</Link>
+              </button>
+              <div className={style.seats}>Available seats: 30</div>
             </div>
           </div>
         );

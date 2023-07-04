@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #4E267D;
+    padding:30px;
+}
+
+.title{
+    color: white;
+    font-size: 100px;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.black,
+.green,
+.white
+{
+    min-width: 30px; 
+    aspect-ratio: 1/1;
+    height: auto;
+    border-radius: 5px;
+}
+
+.black{
+    background-color: black;
+}
+
+.green{
+    background-color: green;
+}
+
+.white{
+    background-color: white;
+}
+
+.section{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: white;
+    font-size: 24px;
+}
