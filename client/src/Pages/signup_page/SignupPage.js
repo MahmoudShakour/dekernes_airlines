@@ -8,7 +8,7 @@ export default function SignupPage() {
       <NavBar />
       <div className={style.formContainer}>
         <SignUp />
-        <div className={style.glassEffect} ></div>
+        {/* <div className={style.glassEffect} ></div> */}
         <img src={plane} className={style.plane} />
       </div>
     </div>

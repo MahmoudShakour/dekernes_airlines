@@ -9,7 +9,7 @@ export default function LoginPage({ user, changeUser }) {
       <NavBar user={user} />
       <div className={style.formContainer}>
         <Login changeUser={changeUser} />
-        <div className={style.glassEffect} ></div>
+        {/* <div className={style.glassEffect} ></div> */}
         <img src={plane} className={style.plane} />
       </div>
     </div>

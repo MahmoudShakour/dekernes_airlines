@@ -1,0 +1,9 @@
+.row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.subRow{
+    display: flex;
+    gap: 20px;
+}

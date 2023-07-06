@@ -1,0 +1,12 @@
+.seat{
+    border: none;
+    font-size: 30px;
+    background-color: #FFD464;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.seat:hover{
+    background-color: #bb9b49;
+
+}
