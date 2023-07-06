@@ -9,14 +9,16 @@ const {
 var router = express.Router();
 
 router.get("/:flightId", authToken, async function (req, res, next) {
-  const [seats, reservedSeats] = await Promise.all([
+  let [seats, reservedSeats] = await Promise.all([
     getSeatsByFlight([req.params.flightId]),
     getReservedSeatsByFlight(req.params.flightId),
   ]);
-
-  res
-    .status(200)
-    .json({ seats, reservedSeats: reservedSeats.map((x) => x.seat_number) });
+  reservedSeats = reservedSeats.map((x) => x.seat_number);
+  console.log(seats);
+  console.log(reservedSeats);
+  seats = compactData(seats, reservedSeats);
+  console.log(seats);
+  res.status(200).json({ seats });
 });
 
 router.post("/:flightId", authToken, async function (req, res, next) {
@@ -53,6 +55,21 @@ function reserveTakenseats(firstSeats, secondSeats) {
     }
   }
   return false;
+}
+
+function compactData(seats, reservedSeats) {
+  console.log("indide");
+  console.log(seats);
+  console.log(reservedSeats);
+  for (let i = 0; i < seats.length; i++) {
+    const found = reservedSeats.find((seat)=>seat===seats[i].seat_number);
+    if (found) {
+      seats[i].is_reserved = true;
+    } else {
+      seats[i].is_reserved = false;
+    }
+  }
+  return seats;
 }
 
 module.exports = router;

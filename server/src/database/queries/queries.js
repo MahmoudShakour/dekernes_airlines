@@ -39,7 +39,7 @@ async function filterFlights(data) {
 }
 
 async function getSeatsByFlight(data) {
-  const seats = await query(
+  let seats = await query(
     `
     SELECT seat_number,seat_class,seat_type,seat_price FROM airplane_seat natural join flight WHERE flight_number=?;
     `,
@@ -49,7 +49,7 @@ async function getSeatsByFlight(data) {
 }
 
 async function getReservedSeatsByFlight(flightId) {
-  const reservedSeats = await query(
+  let reservedSeats = await query(
     `
       SELECT seat_number FROM flight_seat WHERE flight_number=?;
     `,
