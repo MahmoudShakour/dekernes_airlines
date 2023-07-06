@@ -14,12 +14,11 @@ router.get("/:flightId", authToken, async function (req, res, next) {
     getReservedSeatsByFlight(req.params.flightId),
   ]);
   reservedSeats = reservedSeats.map((x) => x.seat_number);
-  console.log(seats);
-  console.log(reservedSeats);
   seats = compactData(seats, reservedSeats);
-  console.log(seats);
-  res.status(200).json({ seats });
+  const formattedSeats = segmentSeats(seats);
+  res.status(200).json({ seats: formattedSeats });
 });
+
 
 router.post("/:flightId", authToken, async function (req, res, next) {
   try {
@@ -29,40 +28,35 @@ router.post("/:flightId", authToken, async function (req, res, next) {
       res.status(403).json({ message: "you can not reserve taken seats." });
       return;
     }
-
+    
     const purchase = await initializePurchase(req.user.user_id);
-
+    
     await reserveSeats(
       req.params.flightId,
       req.body.seats,
       purchase.insertId,
       req.body.airplane_code
-    );
-    res.status(200).json({ purchaseInsertId: purchase.InsertId });
-  } catch (error) {
-    res.status(404).json({ message: "error" });
-  }
-});
-
-function reserveTakenseats(firstSeats, secondSeats) {
-  // console.log(firstSeats);
-  // console.log(secondSeats);
-  for (let i = 0; i < firstSeats.length; i++) {
-    for (let j = 0; j < secondSeats.length; j++) {
-      if (firstSeats[i] === secondSeats[j].seat_number) {
-        return true;
-      }
+      );
+      res.status(200).json({ purchaseInsertId: purchase.InsertId });
+    } catch (error) {
+      res.status(404).json({ message: "error" });
     }
+  });
+  
+  function reserveTakenseats(firstSeats, secondSeats) {
+    for (let i = 0; i < firstSeats.length; i++) {
+      for (let j = 0; j < secondSeats.length; j++) {
+        if (firstSeats[i] === secondSeats[j].seat_number) {
+          return true;
+        }
+      }
   }
   return false;
 }
 
 function compactData(seats, reservedSeats) {
-  console.log("indide");
-  console.log(seats);
-  console.log(reservedSeats);
   for (let i = 0; i < seats.length; i++) {
-    const found = reservedSeats.find((seat)=>seat===seats[i].seat_number);
+    const found = reservedSeats.find((seat) => seat === seats[i].seat_number);
     if (found) {
       seats[i].is_reserved = true;
     } else {
@@ -70,6 +64,15 @@ function compactData(seats, reservedSeats) {
     }
   }
   return seats;
+}
+
+function segmentSeats(seats) {
+  let formattedSeats = [];
+  for (let i = 0; i < seats.length; i += 4) {
+    let row = seats.slice(i, Math.min(i + 4, seats.length));
+    formattedSeats.push(row);
+  }
+  return formattedSeats;
 }
 
 module.exports = router;
