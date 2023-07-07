@@ -1,0 +1,38 @@
+.seatSummary {
+  display: flex;
+  padding: 100px;
+  background-color: #4e267d;
+  justify-content: space-around;
+}
+
+.seatInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  font-size: 30px;
+  color: #fff;
+}
+
+.section {
+  color: white;
+  font-size: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.section button {
+  font-size: 40px;
+  color: #4e267d;
+  background-color: #ffc17a;
+  font-weight: 700px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+.section button:hover {
+  background-color: #efab5e;
+}
