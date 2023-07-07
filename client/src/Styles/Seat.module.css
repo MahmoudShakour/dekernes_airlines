@@ -1,12 +1,18 @@
-.seat{
-    border: none;
-    font-size: 30px;
-    background-color: #FFD464;
-    padding: 10px;
-    border-radius: 10px;
+.reservedSeat,
+.nonReservedSeat {
+  border: none;
+  font-size: 30px;
+  background-color: #ffdfb9;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 60px;
 }
 
-.seat:hover{
-    background-color: #bb9b49;
+.reservedSeat:hover {
+  background-color: #cdb494;
+}
 
+.nonReservedSeat {
+  background-color: #a4193d;
+  color: white;
 }

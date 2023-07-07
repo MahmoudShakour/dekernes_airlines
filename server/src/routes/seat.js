@@ -16,6 +16,7 @@ router.get("/:flightId", authToken, async function (req, res, next) {
   reservedSeats = reservedSeats.map((x) => x.seat_number);
   seats = compactData(seats, reservedSeats);
   const formattedSeats = segmentSeats(seats);
+  console.log(formattedSeats);
   res.status(200).json({ seats: formattedSeats });
 });
 

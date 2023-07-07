@@ -115,6 +115,7 @@ CREATE TABLE flight_seat(
 
 
 
+
 INSERT INTO airplane VALUES ("ABC","model1","comp1");
 INSERT INTO airplane VALUES ("AAA","model2","comp1");
 INSERT INTO airplane VALUES ("AAB","model2","comp1");
@@ -137,6 +138,52 @@ INSERT INTO airplane_seat VALUES('B1','AAA','economy','window',1000.00);
 INSERT INTO airplane_seat VALUES('B2','AAA','economy','middle',1000.00);
 INSERT INTO airplane_seat VALUES('B3','AAA','economy','middle',1000.00);
 INSERT INTO airplane_seat VALUES('B4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('C1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('C2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('C3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('C4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('D1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('D2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('D3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('D4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('E1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('E2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('E3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('E4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('F1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('F2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('F3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('F4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('G1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('G2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('G3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('G4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('H1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('H2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('H3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('H4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('I1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('I2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('I3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('I4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('J1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('J2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('J3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('J4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('K1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('K2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('K3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('K4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('L1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('L2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('L3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('L4','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('M1','AAA','economy','window',1000.00);
+INSERT INTO airplane_seat VALUES('M2','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('M3','AAA','economy','middle',1000.00);
+INSERT INTO airplane_seat VALUES('M4','AAA','economy','window',1000.00);
+
+
 
 INSERT INTO airplane_seat VALUES('A1','AAB','economy','window',1000.00);
 INSERT INTO airplane_seat VALUES('A2','AAB','economy','middle',1000.00);

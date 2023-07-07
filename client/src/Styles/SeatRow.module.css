@@ -1,6 +1,8 @@
 .row{
     display: flex;
-    justify-content: space-between;
+    gap: 80px;
+    background-color: #FFD464;
+    justify-content: space-around;
 }
 
 .subRow{

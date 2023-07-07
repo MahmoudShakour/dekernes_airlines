@@ -14,20 +14,13 @@
 .container{
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 50px;
     align-self: center;
     min-width: 300px;
     padding: 30px;
 }
 
 
-
-.row{
-    display: flex;
-    gap: 20px;
-    background-color: #FFD464;
-    justify-content: space-around;
-}
 
 .row:nth-of-type(3) div{
     background-color: #FFD464;
