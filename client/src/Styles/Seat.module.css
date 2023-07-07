@@ -1,5 +1,6 @@
 .reservedSeat,
-.nonReservedSeat {
+.nonReservedSeat,
+.line {
   border: none;
   font-size: 30px;
   background-color: #ffdfb9;
@@ -8,11 +9,15 @@
   min-width: 60px;
 }
 
-.reservedSeat:hover {
+.nonReservedSeat:hover {
   background-color: #cdb494;
 }
 
-.nonReservedSeat {
+.ReservedSeat {
   background-color: #a4193d;
   color: white;
+}
+
+.line {
+  text-decoration: line-through;
 }

@@ -2,7 +2,7 @@ import FlightSeats from "../Api/FlightSeats";
 import style from "../Styles/SeatMap.module.css";
 import { useEffect, useState } from "react";
 import SeatRow from "./SeatRow";
-export default function SeatMap({ flight_number }) {
+export default function SeatMap({ flight_number,addSeat,removeSeat }) {
   const [seats, setSeats] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function SeatMap({ flight_number }) {
     <div className={style.seatMap}>
       <div className={style.container}>
         {seats.map((row, index) => (
-          <SeatRow key={index} seats={row} />
+          <SeatRow key={index} seats={row} addSeat={addSeat} removeSeat={removeSeat} />
         ))}
       </div>
     </div>
