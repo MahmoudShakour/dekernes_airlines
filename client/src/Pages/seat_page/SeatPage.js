@@ -24,7 +24,7 @@ export default function SeatPage({ user }) {
       <NavBar user={user} />
       <SeatInfo />
       <SeatMap flight_number={flight_number} addSeat={addSeat} removeSeat={removeSeat} />
-      <SeatSummary bookedSeats={bookedSeats} />
+      <SeatSummary bookedSeats={bookedSeats} flight_number={flight_number} />
     </div>
   );
 }

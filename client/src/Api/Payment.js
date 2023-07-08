@@ -1,4 +1,5 @@
-async function payment(data) {
+async function submitPayment(data) {
+  console.log("hi");
   const token = localStorage.getItem("token");
   const response = await fetch("http://localhost:3000/payment", {
     method: "POST",
@@ -9,11 +10,12 @@ async function payment(data) {
     body: JSON.stringify(data),
   });
 
+  console.log("hi");
   if (response.ok) {
     const { url } = await response.json();
     console.log(url);
-    // window.location=url;
+    window.location = url;
   }
 }
 
-export default payment;
+export default submitPayment;
