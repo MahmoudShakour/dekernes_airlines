@@ -4,6 +4,7 @@ const {
   getReservedSeatsByFlight,
   reserveSeats,
   initializePurchase,
+  getSeatsPrice,
 } = require("../database/queries/queries");
 const handleBookedSeats = require("../middlewares/handleBookedSeats");
 const router = express.Router();
@@ -11,6 +12,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 router.post("/", authToken, handleBookedSeats, async (req, res) => {
   try {
+    const seats=await getSeatsPrice(req.body.seats,req.body.airplane_code);
+    console.log(seats);
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -19,14 +22,14 @@ router.post("/", authToken, handleBookedSeats, async (req, res) => {
         airplane_code: req.body.airplane_code,
         flightId: req.body.flight_number,
       },
-      line_items: req.body.seats.map((seat) => {
+      line_items: seats.map((seat) => {
         return {
           price_data: {
             currency: "usd",
             product_data: {
-              name: "seat: " + seat,
+              name: "seat: " + seat.seat_number,
             },
-            unit_amount: 1000 * 100,
+            unit_amount: Number(seat.seat_price) * 100,
           },
           quantity: 1,
         };

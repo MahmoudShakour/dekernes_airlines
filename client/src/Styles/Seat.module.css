@@ -9,10 +9,6 @@
   min-width: 60px;
 }
 
-.nonReservedSeat:hover {
-  background-color: #cdb494;
-}
-
 .ReservedSeat {
   background-color: #a4193d;
   color: white;

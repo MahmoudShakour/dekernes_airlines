@@ -58,7 +58,6 @@ async function getAirplaneCode(flight_number) {
   return seats;
 }
 
-
 async function getReservedSeatsByFlight(flightId) {
   let reservedSeats = await query(
     `
@@ -78,6 +77,24 @@ async function reserveSeats(flightId, seats, purchaseId, airplane_code) {
       [flightId, airplane_code, seats[i], purchaseId]
     );
   }
+}
+
+async function getSeatsPrice(seats, airplane_code) {
+  const newSeats = await Promise.all(
+    seats.map(async (seat) => {
+      const formattedSeats = await query(
+        `
+        SELECT seat_number,seat_price from airplane_seat WHERE airplane_code=? AND seat_number=?
+      `,
+        [airplane_code, seat]
+      );
+      console.log("1");
+      console.log(formattedSeats[0]);
+      console.log("1");
+      return formattedSeats[0];
+    })
+  );
+  return newSeats;
 }
 
 async function initializePurchase(userId) {
@@ -110,12 +127,12 @@ async function getOnePurchase(userId, purchaseId) {
     `
     SELECT * FROM 
     purchase NATURAL JOIN flight_seat NATURAL JOIN flight NATURAL JOIN airplane_seat where purchase_id=?;
-    `,Purchase
+    `,
     [purchaseId]
   );
 
   if (purchase.length === 0) return null;
-  if(purchase.user_id!==userId) return false;
+  if (purchase.user_id !== userId) return false;
   const seats = purchase.map((x) => {
     return {
       seat_number: x.seat_number,
@@ -147,5 +164,6 @@ module.exports = {
   initializePurchase,
   getPurchases,
   getOnePurchase,
-  getAirplaneCode
+  getAirplaneCode,
+  getSeatsPrice,
 };
