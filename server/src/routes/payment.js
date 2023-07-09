@@ -1,13 +1,24 @@
 const express = require("express");
 const authToken = require("../middlewares/AuthToken");
+const {
+  getReservedSeatsByFlight,
+  reserveSeats,
+  initializePurchase,
+} = require("../database/queries/queries");
+const handleBookedSeats = require("../middlewares/handleBookedSeats");
 const router = express.Router();
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-router.post("/", authToken, async (req, res) => {
+router.post("/", authToken, handleBookedSeats, async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
+      metadata: {
+        user_id: req.user.user_id,
+        airplane_code: req.body.airplane_code,
+        flightId: req.body.flight_number,
+      },
       line_items: req.body.seats.map((seat) => {
         return {
           price_data: {
@@ -29,7 +40,7 @@ router.post("/", authToken, async (req, res) => {
   }
 });
 
-router.post("/webhook", (req, res) => {
+router.post("/webhook", async (req, res) => {
   try {
     const signature = req.headers["stripe-signature"];
     const webhookEvent = stripe.webhooks.constructEvent(
@@ -38,10 +49,30 @@ router.post("/webhook", (req, res) => {
       process.env.WEBHOOK_SECRET_KEY
     );
 
-    if (webhookEvent.type === "payment_intent.succeeded") {
-      console.log("Payment succeeded!");
-    }
+    if (webhookEvent.type === "checkout.session.completed") {
+      const session = webhookEvent.data.object;
+      const { line_items } = await stripe.checkout.sessions.retrieve(
+        session.id,
+        {
+          expand: ["line_items"],
+        }
+      );
 
+      const seatsToBook = line_items.data
+        .map((seat) => seat.description)
+        .map((seat) => seat.split(" ")[1]);
+      console.log(seatsToBook);
+      // send user id via metadata
+      console.log(session.metadata);
+      const purchase = await initializePurchase(session.metadata.user_id);
+      
+      await reserveSeats(
+        session.metadata.flightId,
+        seatsToBook,
+        purchase.insertId,
+        session.metadata.airplane_code
+      );
+    }
     res.sendStatus(200);
   } catch (error) {
     console.log(error.message);

@@ -8,7 +8,6 @@ const flightRouter = require("./routes/flight");
 const seatRouter = require("./routes/seat");
 const purchaseRouter = require("./routes/purchase");
 const paymentRouter = require("./routes/payment");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const app = express();
 app.use(cors());
 

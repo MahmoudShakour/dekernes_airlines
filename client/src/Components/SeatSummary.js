@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import submitPayment from "../Api/Payment";
 import style from "../Styles/Seatsummary.module.css";
 
-export default function SeatSummary({ bookedSeats, flight_number }) {
+export default function SeatSummary({ bookedSeats, flight_number,airplane_code }) {
   const [number, setNumber] = useState(0);
   const [price, setPrice] = useState(0);
 
@@ -17,7 +17,7 @@ export default function SeatSummary({ bookedSeats, flight_number }) {
 
   const handlePayment = async () => {
     const seats = bookedSeats.map((seat) => seat.seat_number);
-    submitPayment({ flight_number, seats });
+    submitPayment({ flight_number, seats,airplane_code });
   };
 
   return (

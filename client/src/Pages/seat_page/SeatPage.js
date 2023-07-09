@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export default function SeatPage({ user }) {
   const [bookedSeats, setBookedSeats] = useState([]);
+  const [airplaneCode,setAirplaceCode]=useState("");
   const { flight_number } = useParams();
 
   const addSeat = (seat) => {
@@ -23,8 +24,8 @@ export default function SeatPage({ user }) {
     <div className={style.page}>
       <NavBar user={user} />
       <SeatInfo />
-      <SeatMap flight_number={flight_number} addSeat={addSeat} removeSeat={removeSeat} />
-      <SeatSummary bookedSeats={bookedSeats} flight_number={flight_number} />
+      <SeatMap flight_number={flight_number} handleAirplaneCode={setAirplaceCode} addSeat={addSeat} removeSeat={removeSeat} />
+      <SeatSummary  bookedSeats={bookedSeats} flight_number={flight_number} airplane_code={airplaneCode}  />
     </div>
   );
 }

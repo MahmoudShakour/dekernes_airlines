@@ -11,6 +11,7 @@ async function FlightSeats(flightNumber){
     if(response.ok){
         const resp=await response.json();   
         console.log(resp);
+        console.log("here");
         return resp;
     }
     else{

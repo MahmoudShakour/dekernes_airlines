@@ -48,6 +48,17 @@ async function getSeatsByFlight(data) {
   return seats;
 }
 
+async function getAirplaneCode(flight_number) {
+  let seats = await query(
+    `
+    SELECT DISTINCT airplane_code FROM airplane_seat natural join flight WHERE flight_number=?;
+    `,
+    [flight_number]
+  );
+  return seats;
+}
+
+
 async function getReservedSeatsByFlight(flightId) {
   let reservedSeats = await query(
     `
@@ -67,15 +78,6 @@ async function reserveSeats(flightId, seats, purchaseId, airplane_code) {
       [flightId, airplane_code, seats[i], purchaseId]
     );
   }
-
-  //   const x=await query(
-  //     `
-  //         SELECT * FROM flight_seat
-  //     `,
-  //       []
-  //     );
-
-  //     console.log(x);
 }
 
 async function initializePurchase(userId) {
@@ -108,7 +110,7 @@ async function getOnePurchase(userId, purchaseId) {
     `
     SELECT * FROM 
     purchase NATURAL JOIN flight_seat NATURAL JOIN flight NATURAL JOIN airplane_seat where purchase_id=?;
-    `,
+    `,Purchase
     [purchaseId]
   );
 
@@ -145,4 +147,5 @@ module.exports = {
   initializePurchase,
   getPurchases,
   getOnePurchase,
+  getAirplaneCode
 };
