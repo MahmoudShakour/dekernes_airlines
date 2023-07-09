@@ -4,3 +4,9 @@
   flex-direction: column;
 }
 
+.title{
+    background-color: #4E267D;
+    padding: 20px;
+    color: white;
+    font-size: 60px;
+}

@@ -1,7 +1,6 @@
 const express = require("express");
 const authToken = require("../middlewares/AuthToken");
 const {
-  getReservedSeatsByFlight,
   reserveSeats,
   initializePurchase,
   getSeatsPrice,

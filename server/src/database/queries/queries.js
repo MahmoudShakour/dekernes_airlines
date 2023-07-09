@@ -88,9 +88,6 @@ async function getSeatsPrice(seats, airplane_code) {
       `,
         [airplane_code, seat]
       );
-      console.log("1");
-      console.log(formattedSeats[0]);
-      console.log("1");
       return formattedSeats[0];
     })
   );
