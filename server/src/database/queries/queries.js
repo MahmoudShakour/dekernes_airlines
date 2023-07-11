@@ -106,35 +106,24 @@ async function initializePurchase(userId) {
   return purchase;
 }
 
-
 async function getPurchases(userId) {
-  const purchase = await query(
+  const purchases = await query(
     `
-    SELECT * FROM 
-    purchase NATURAL JOIN flight_seat NATURAL JOIN flight NATURAL JOIN airplane_seat where user_id=?;
+    SELECT user_id,purchase_id,airplane_code,flight_type,flight_date,flight_time,source_airport,destination_airport,purchase_date,COUNT(seat_number) as number_of_seats 
+    FROM  purchase NATURAL JOIN flight_seat NATURAL JOIN flight NATURAL JOIN airplane_seat 
+    GROUP BY user_id,purchase_id,airplane_code,flight_type,flight_date,flight_time,source_airport,destination_airport,purchase_date
+    HAVING user_id=?
+    ORDER BY purchase_id
     `,
     [userId]
   );
 
-  if (purchase.length === 0) return [];
-  const seats = purchase.map((x) => {
-    return {
-      seat_number: x.seat_number,
-      seat_class: x.seat_class,
-      seat_type: x.seat_type,
-      seat_price: x.seat_price,
-    };
+  const formattedPurchases = purchases.map((purchase) => {
+    const { user_id, ...newPurchase } = purchase;
+    return newPurchase;
   });
-  const data = {
-    airplane_code: purchase[0].airplane_code,
-    flight_type: purchase[0].flight_type,
-    flight_date: purchase[0].flight_date,
-    flight_time: purchase[0].flight_time,
-    source_airport: purchase[0].source_airport,
-    destination_airport: purchase[0].destination_airport,
-    purchase_date: purchase[0].purchase_date,
-  };
-  return { seats, ...data };
+
+  return formattedPurchases;
 }
 
 module.exports = {
