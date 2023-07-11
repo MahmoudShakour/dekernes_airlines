@@ -1,0 +1,7 @@
+.card{
+    gap: 5px;
+    border: 2px solid white;
+    min-width: 600px;
+    padding: 20px;
+    font-size: 20px;
+}

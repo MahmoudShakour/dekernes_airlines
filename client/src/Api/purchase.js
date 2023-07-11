@@ -1,4 +1,4 @@
-async function purchase(data) {
+async function purchase() {
     
     const token = localStorage.getItem("token");
     const response = await fetch("http://localhost:3000/purchase", {
@@ -14,8 +14,9 @@ async function purchase(data) {
       console.log(resp);
       return resp
     }
+    console.log("dd");
     return false;
   }
   
-  export default submitPayment;
+  export default purchase;
   
