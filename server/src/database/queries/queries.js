@@ -106,30 +106,17 @@ async function initializePurchase(userId) {
   return purchase;
 }
 
+
 async function getPurchases(userId) {
-  const purchases = await query(
+  const purchase = await query(
     `
-    SELECT purchase_id,flight_number,COUNT(seat_number) as number_of_seats,airplane_code,purchase_date,flight_date FROM 
-    purchase NATURAL JOIN flight_seat NATURAL JOIN flight where user_id=?
-    GROUP BY purchase_id,flight_number,airplane_code,purchase_date,flight_date;
+    SELECT * FROM 
+    purchase NATURAL JOIN flight_seat NATURAL JOIN flight NATURAL JOIN airplane_seat where user_id=?;
     `,
     [userId]
   );
 
-  return purchases;
-}
-
-async function getOnePurchase(userId, purchaseId) {
-  const purchase = await query(
-    `
-    SELECT * FROM 
-    purchase NATURAL JOIN flight_seat NATURAL JOIN flight NATURAL JOIN airplane_seat where purchase_id=?;
-    `,
-    [purchaseId]
-  );
-
-  if (purchase.length === 0) return null;
-  if (purchase.user_id !== userId) return false;
+  if (purchase.length === 0) return [];
   const seats = purchase.map((x) => {
     return {
       seat_number: x.seat_number,
@@ -160,7 +147,6 @@ module.exports = {
   reserveSeats,
   initializePurchase,
   getPurchases,
-  getOnePurchase,
   getAirplaneCode,
   getSeatsPrice,
 };
